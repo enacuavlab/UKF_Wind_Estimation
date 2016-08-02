@@ -16,13 +16,13 @@
 %Outputs :
 %		-state dot   :                      dx 		
 %------------------------------------------------------
-function dx = f(x,u,q)
+function dx = f(x,u,~)
 % dot_uvw, dot_wind_bias, dot_airspeed_scale
 dx = single(zeros(1,7)');
 
 omega = single(u(1:3));
-a = single(rep(q, u(4:6)));
-%a = single(u(4:6));
+%a = single(rep(q, u(4:6)));
+a = single(u(4:6));
 
 %==> dot_UVW
 dx(1) = a(1) + omega(3)* x(2)-omega(2)*x(3);

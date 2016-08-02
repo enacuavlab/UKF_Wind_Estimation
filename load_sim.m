@@ -1,6 +1,6 @@
 clear
 
-load('sim_13.mat');
+load('sim_18.mat');
 
 % model u v w wx wy wz vs
 %Q = diag([0.100 0.100 0.100 0.001000 0.0010 0.00010 0.0001].^2);
