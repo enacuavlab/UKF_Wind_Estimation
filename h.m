@@ -15,7 +15,7 @@
 %------------------------------------------------------
 function y = h(x,q)
 
-m = 5;
+m = 6;
 
 Vsol = single([0;0;0]);
 y = single(zeros(1,m));
@@ -26,7 +26,10 @@ Vsol(1:3) = rep2(q,x(1:3)) + x(4:6)';
 Vpitot = x(7) * single(norm(x(1:3)));
 %==> AOA = atan(w/u)
 alpha = single(atan(x(3)/x(1)));
+%==> Sideslip = atan(v/u)
+beta = single(asin(x(2)/norm(x)));
 
 y(1:3) = Vsol(1:3);
 y(4) = Vpitot;
 y(5) = alpha;
+y(6) = beta;
