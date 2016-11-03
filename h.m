@@ -18,16 +18,22 @@ function y = h(x,q)
 m = 6;
 
 Vsol = single([0;0;0]);
+Vair = single(norm(x(1:3)));
 y = single(zeros(1,m));
 
 %==> Ground speed|R0 = [u,v,w]|R0 + wind|R0
 Vsol(1:3) = rep2(q,x(1:3)) + x(4:6)';
 %==> Va = scale factor * norm([u,v,w])
-Vpitot = x(7) * single(norm(x(1:3)));
-%==> AOA = atan(w/u)
-alpha = single(atan(x(3)/x(1)));
-%==> Sideslip = atan(v/u)
-beta = single(asin(x(2)/norm(x)));
+Vpitot = x(7) * Vair;
+if Vair > 0.0001,
+    %==> AOA = atan(w/u)
+    alpha = single(atan2(x(3),x(1)));
+    %==> Sideslip = asin(v/||Vair||)
+    beta = single(asin(x(2)/Vair));
+else
+    alpha = single(0.);
+    beta = single(0.);
+end
 
 y(1:3) = Vsol(1:3);
 y(4) = Vpitot;
